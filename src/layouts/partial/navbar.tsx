@@ -1,67 +1,96 @@
-"use client";
+'use client'
 
-import React, { useState, ReactNode } from "react";
-import { MenuSidebar } from "./sidebar";
-import router from "next/router";
-import { Icon } from "@iconify/react";
-import { Button, Card, Tooltip } from "@nextui-org/react";
-import { useDispatch, useSelector } from "react-redux";
-import Drawer from "@/components/drawer";
-import SwicthThemes from "@/components/swicth-themes";
+import type { NavbarProps } from '@nextui-org/react'
 
-type Props = {};
+import React from 'react'
+import {
+  Navbar as NavbarNextUI,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+  Link,
+  Button
+} from '@nextui-org/react'
+import SwitchThemes from '@/components/swicth-themes'
 
-const Navbar = (props: Props) => {
-  const [isOpenToggle, setIsOpenToggle] = useState(false);
-  const logout = () => {
-    router.push("/");
-  };
+const menuItems = ['About', 'Blog', 'Customers', 'Pricing', 'Enterprise', 'Changelog', 'Documentation', 'Contact Us']
 
+export default function Navbar(props: NavbarProps) {
   return (
-    <nav className="sticky top-0 z-[40]">
-      <div className="bg-gradient-to-b from-background/80 from-30% to-background/0 p-6 pt-5 max-md:p-5  max-md:pt-3">
-        <Card className="flex flex-row items-center justify-between px-5 py-2 bg-opacity-90">
-          <div className="flex items-center gap-5">
-            <div className="lg:hidden">
-              <div
-                className="cursor-pointer"
-                onClick={() => {
-                  setIsOpenToggle(!isOpenToggle);
-                }}
-              >
-                <Icon icon="lucide:menu" className="w-6 h-6" />
-              </div>
-              <Drawer
-                direction="left"
-                open={isOpenToggle}
-                onClose={() => {
-                  setIsOpenToggle(!isOpenToggle);
-                }}
-                size={"18rem"}
-                className="px-5"
-              >
-                <MenuSidebar />
-              </Drawer>
-            </div>
-            <div className="uppercase">Asset Me</div>
-          </div>
-          <div className="flex items-center gap-2">
-            <SwicthThemes />
-            <Tooltip
-              showArrow={true}
-              content="ออกจากระบบ"
-              delay={0}
-              closeDelay={200}
-            >
-              <Button isIconOnly variant="light" onClick={logout}>
-                <Icon icon="lucide:log-out" className="w-6 h-6" />
-              </Button>
-            </Tooltip>
-          </div>
-        </Card>
-      </div>
-    </nav>
-  );
-};
+    <NavbarNextUI
+      {...props}
+      classNames={{
+        base: 'py-4 backdrop-filter-none bg-transparent',
+        wrapper: 'px-0 w-full justify-center bg-transparent',
+        item: 'hidden md:flex'
+      }}
+      height='3.375rem'>
+      <NavbarContent
+        className='gap-4 rounded-full border-small border-default-200/20 bg-background/60 px-2 shadow-medium backdrop-blur-md backdrop-saturate-150 dark:bg-default-100/50'
+        justify='center'>
+        {/* Toggle */}
+        <NavbarMenuToggle className='ml-2 text-default-400 md:hidden' />
 
-export default Navbar;
+        {/* Logo */}
+        <NavbarBrand className='mr-2 w-[40vw] md:w-auto md:max-w-fit'>
+          <div className='rounded-full bg-foreground text-background'>MS</div>
+          <span className='ml-2 font-medium md:hidden'>ACME</span>
+        </NavbarBrand>
+
+        {/* Items */}
+        <NavbarItem className='hidden md:flex'>
+          <Link className='text-default-500' href='#' size='sm'>
+            หน้าหลัก
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link className='text-default-500' href='#' size='sm'>
+            Features
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color='foreground' href='#' size='sm'>
+            Customers
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link className='text-default-500' href='#' size='sm'>
+            About Us
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <SwitchThemes />
+        </NavbarItem>
+        <NavbarItem className='-ml-2'>
+          <Button radius='full' variant='flat'>
+            Login
+          </Button>
+        </NavbarItem>
+      </NavbarContent>
+
+      {/* Menu */}
+      <NavbarMenu
+        className='top-[calc(var(--navbar-height)/2)] mx-auto mt-16 max-h-[40vh] max-w-[80vw] rounded-large border-small border-default-200/20 bg-background/60 py-6 shadow-medium backdrop-blur-md backdrop-saturate-150 dark:bg-default-100/50'
+        motionProps={{
+          initial: { opacity: 0, y: -20 },
+          animate: { opacity: 1, y: 0 },
+          exit: { opacity: 0, y: -20 },
+          transition: {
+            ease: 'easeInOut',
+            duration: 0.2
+          }
+        }}>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link className='w-full text-default-500' href='#' size='md'>
+              {item}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
+    </NavbarNextUI>
+  )
+}
