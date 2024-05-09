@@ -15,20 +15,14 @@ import Container from '@/components/container'
 type Props = {}
 
 const Home = (props: Props) => {
-  const loaderGlobal = useLoaderGlobal()
-
-  const { theme, setTheme } = useTheme()
-  const [date, setDate] = useState<Date | undefined>()
-  const [arrDate, setArrDate] = useState<Date[] | undefined>()
-  const [rangeDate, setRangeDate] = useState<DateRange | undefined>()
-
-  const getApi = async () => {
-    loaderGlobal.start()
-    await apiBase.get({ urlBase: 'https://randomuser.me', url: '/api' })
-    loaderGlobal.stop()
-  }
-
-  return <Fragment></Fragment>
+  return (
+    <Fragment>
+      <Container className='mt-10'>
+        <h1 className='text-5xl font-semibold text-center'>MoneyStory</h1>
+        <p className='text-xl text-center'>จัดสรรสัดส่วนการลงทุน</p>
+      </Container>
+    </Fragment>
+  )
 }
 
 Home.getLayout = (page: ReactElement) => {

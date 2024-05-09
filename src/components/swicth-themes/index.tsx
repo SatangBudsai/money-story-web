@@ -3,31 +3,34 @@
 import React, { Fragment } from 'react'
 import { useTheme } from 'next-themes'
 import { Icon } from '@iconify/react'
-import { Button } from '@nextui-org/react'
+import { Button, Switch, cn } from '@nextui-org/react'
 
 const SwitchThemes = () => {
-  const { setTheme } = useTheme()
+  const { setTheme, theme } = useTheme()
+
+  const handleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark')
+    } else {
+      setTheme('light')
+    }
+  }
 
   return (
     <Fragment>
-      <div className='relative flex'>
-        <Button
-          isIconOnly
-          variant='flat'
-          color='primary'
-          className='absolute scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0'
-          onClick={() => setTheme('dark')}>
-          <Icon icon='mingcute:sun-fill' className='h-6 w-6 rotate-0 transition-all dark:-rotate-90' />
-        </Button>
-        <Button
-          isIconOnly
-          color='primary'
-          variant='flat'
-          onClick={() => setTheme('light')}
-          className='scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100'>
-          <Icon icon='ph:moon-fill' className='h-6 w-6 rotate-90 transition-all dark:rotate-0' />
-        </Button>
-      </div>
+      <Switch
+        isSelected={theme === 'light'}
+        size='md'
+        color='primary'
+        thumbIcon={({ isSelected, className }) =>
+          isSelected ? (
+            <Icon icon='mingcute:sun-fill' onClick={handleTheme} className={cn(className, 'text-primary-600')} />
+          ) : (
+            <Icon icon='ph:moon-fill' onClick={handleTheme} className={cn(className, 'text-primary-400')} />
+          )
+        }
+        onClick={handleTheme}
+      />
     </Fragment>
   )
 }

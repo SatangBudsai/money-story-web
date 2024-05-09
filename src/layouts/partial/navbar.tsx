@@ -15,6 +15,7 @@ import {
   Button
 } from '@nextui-org/react'
 import SwitchThemes from '@/components/swicth-themes'
+import { Icon } from '@iconify/react/dist/iconify.js'
 
 const menuItems = ['About', 'Blog', 'Customers', 'Pricing', 'Enterprise', 'Changelog', 'Documentation', 'Contact Us']
 
@@ -35,38 +36,40 @@ export default function Navbar(props: NavbarProps) {
         <NavbarMenuToggle className='ml-2 text-default-400 md:hidden' />
 
         {/* Logo */}
-        <NavbarBrand className='mr-2 w-[40vw] md:w-auto md:max-w-fit'>
-          <div className='rounded-full bg-foreground text-background'>MS</div>
-          <span className='ml-2 font-medium md:hidden'>ACME</span>
+        <NavbarBrand className='w-[40vw] md:w-auto md:max-w-fit'>
+          <div className='rounded-full'>
+            <Icon icon='solar:round-graph-bold' className='text-4xl text-primary' />
+          </div>
+          <span className='ml-2 font-medium md:hidden'>MoneyStory</span>
         </NavbarBrand>
 
         {/* Items */}
         <NavbarItem className='hidden md:flex'>
-          <Link className='text-default-500' href='#' size='sm'>
+          <Link className='text-default-500' href='#'>
             หน้าหลัก
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link className='text-default-500' href='#' size='sm'>
-            Features
+        <NavbarItem className='hidden md:flex'>
+          <Link color='primary' href='#'>
+            พอร์ตของฉัน
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color='foreground' href='#' size='sm'>
-            Customers
+          <Link className='text-default-500' href='#'>
+            กราฟวิเคราะห์ผล
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link className='text-default-500' href='#' size='sm'>
-            About Us
+          <Link className='text-default-500' href='#'>
+            อันดับสินทรัพย์
           </Link>
         </NavbarItem>
         <NavbarItem>
           <SwitchThemes />
         </NavbarItem>
-        <NavbarItem className='-ml-2'>
+        <NavbarItem className='-ml-3'>
           <Button radius='full' variant='flat'>
-            Login
+            เข้าสู่ระบบ
           </Button>
         </NavbarItem>
       </NavbarContent>
