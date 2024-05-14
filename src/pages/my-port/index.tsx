@@ -4,7 +4,7 @@ import RootLayout from '@/layouts/root-layout'
 import MainLayout from '@/layouts/main-layout'
 import { DateRange } from 'react-day-picker'
 import Alert from '@/components/alert'
-import { Button, Card, CardBody, CardFooter, CardHeader, Chip, Divider, Input } from '@nextui-org/react'
+import { Button, Card, CardBody, CardFooter, CardHeader, Chip, Divider, Input, Spacer } from '@nextui-org/react'
 import apiBase from '@/api/base'
 import useLoaderGlobal from '@/hooks/useLoaderGlobal'
 import DatePicker from '@/components/date-picker'
@@ -28,7 +28,25 @@ const Home = (props: Props) => {
               1 พอร์ต
             </Chip>
           </div>
-          <div className='grid grid-cols-3 gap-5 max-lg:grid-cols-2'>
+          <div className='grid grid-cols-3 gap-5 max-lg:grid-cols-2 max-md:grid-cols-1'>
+            <Card className='border-2' shadow='none'>
+              <CardHeader className='justify-between'>
+                <h2 className='text-xl'>ทรัพย์สินทั้งหมด</h2>
+                <Button color='primary'>รายลละเอียด</Button>
+              </CardHeader>
+              <Divider />
+              <CardBody className='flex flex-row flex-wrap gap-2 text-xl'>
+                <Chip
+                  variant='flat'
+                  color='success'
+                  startContent={<Icon icon='streamline:dollar-coin-solid' className='text-xl' />}>
+                  1,000 USD
+                </Chip>
+                <Chip variant='flat' color='warning'>
+                  10 หุ้น
+                </Chip>
+              </CardBody>
+            </Card>
             <Card className='border-2' shadow='none'>
               <CardHeader className='justify-between'>
                 <h2 className='text-xl'>พอร์ตหลัก</h2>
@@ -36,8 +54,10 @@ const Home = (props: Props) => {
               </CardHeader>
               <Divider />
               <CardBody className='flex flex-row flex-wrap gap-2 text-xl'>
-                <Chip variant='flat' color='success' startContent={<Icon icon='streamline:dollar-coin-solid' className='text-xl' />}>
-
+                <Chip
+                  variant='flat'
+                  color='success'
+                  startContent={<Icon icon='streamline:dollar-coin-solid' className='text-xl' />}>
                   1,000 USD
                 </Chip>
                 <Chip variant='flat' color='warning'>
@@ -55,6 +75,11 @@ const Home = (props: Props) => {
               </CardBody>
             </Card> */}
           </div>
+        </div>
+        <Spacer y={10} />
+        <div className='flex flex-col gap-3'>
+          <h2 className='text-2xl font-semibold'>รายละเอียดข้อมูล</h2>
+          <p className='py-10 text-xl text-center rounded-xl bg-warning-100 text-warning'>กรุณาเลือกพอร์ต</p>
         </div>
         {/* <Card className='mt-10'>
           <CardHeader className='justify-between'>

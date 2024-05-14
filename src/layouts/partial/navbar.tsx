@@ -30,13 +30,13 @@ export default function Navbar(props: NavbarProps) {
       }}
       height='3.375rem'>
       <NavbarContent
-        className='gap-4 rounded-full border-small border-default-200/20 bg-background/60 px-2 shadow-medium backdrop-blur-md backdrop-saturate-150 dark:bg-default-100/50'
+        className='gap-4 px-2 rounded-full border-small border-default-200/20 bg-background/60 shadow-medium backdrop-blur-md backdrop-saturate-150 dark:bg-default-100/50'
         justify='center'>
         {/* Toggle */}
         <NavbarMenuToggle className='ml-2 text-default-400 md:hidden' />
 
         {/* Logo */}
-        <NavbarBrand className='w-[40vw] md:w-auto md:max-w-fit'>
+        <NavbarBrand className='w-[80vw] md:w-auto md:max-w-fit'>
           <div className='rounded-full'>
             <Icon icon='solar:round-graph-bold' className='text-4xl text-primary' />
           </div>
